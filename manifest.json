@@ -1,0 +1,16 @@
+{
+    "name": "Infinite_Scroller",
+    "short_name": "Infinite_Scroller",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "theme_color": "#673ab7",
+    "background_color": "#673ab7",
+    "icons": [
+        {
+            "src": "/icon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

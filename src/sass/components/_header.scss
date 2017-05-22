@@ -1,0 +1,29 @@
+.header {
+    position: fixed;
+    width: 100%;
+    height: $header-height;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    background: $primary-color;
+    color: $white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0 16px;
+    z-index: 1;
+
+    @at-root #{&}__menu-toggle {
+        background: none;
+        border: none;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        margin: 0;
+        color: $white;
+    }
+
+    @at-root #{&}__title {
+        font-size: 20px;
+        font-weight: 400;
+        margin-left: 15px;
+    }
+}

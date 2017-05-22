@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="author" content="Luis Torres" />
+        <meta name="viewport" content="width=device-width,minimum-scale=1">
+        <meta name="theme-color" content="#673ab7">
+        <title>Infinite Scrolling Message List</title>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+        <link href="./dist/assets/css/main.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="header">
+            <button class="js-menu-show header__menu-toggle material-icons">menu</button>
+            <h1 class="header__title">Messages</h1>
+        </div>
+
+        <main class="page">
+            <!-- maybe need div for the touch event when dragging cards -->
+            <ul id="messages-exp" class="scroller scroller--swipeable"></ul>
+        </main>
+
+        <div id="templates" style="display: none;">
+            <li class="scroller__item" data-id="{{id}}">
+                <div class="card">
+                    <div class="card__header">
+                        <img class="card__avatar" src="" alt="">
+                        <div class="card__details">
+                            <div class="card__title"></div>
+                            <div class="card__subtitle"></div>
+                        </div>
+                    </div>
+                    <div class="card__content"></div>
+                </div>
+            </li>
+            <li class="scroller__item scroller__item--loading" data-id="{{id}}">
+                <div class="card">
+                    <div class="loading__block">
+                        <div class="loading__circle"></div>
+                        <div class="loading__line-wrapper">
+                            <div class="loading__line width110"></div>
+                            <div class="loading__line width80"></div>
+                        </div>
+                        <div class="loading__message">
+                            <div class="loading__line"></div>
+                            <div class="loading__line"></div>
+                            <div class="loading__line width250"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </div>
+
+        <script id="loading-card-template" type="text/html">
+            <li class="scroller__item scroller__item--loading">
+                <div class="card">
+                    <div class="loading__block padding-20">
+                        <div class="loading__circle"></div>
+                        <div class="loading__line-wrapper">
+                            <div class="loading__line width110"></div>
+                            <div class="loading__line width80"></div>
+                        </div>
+                        <div class="loading__message">
+                            <div class="loading__line"></div>
+                            <div class="loading__line"></div>
+                            <div class="loading__line width250"></div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </script>
+
+        <script src="./dist/lib/deps.min.js"></script>
+        <script src="../dist/assets/js/main.min.js"></script>
+    </body>
+</html>

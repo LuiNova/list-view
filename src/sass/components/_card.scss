@@ -1,0 +1,64 @@
+.card-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 16px;
+    margin: 0 auto;
+}
+
+.card {
+    background: #fff;
+    border-radius: 3px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.3);
+    // margin: 20px 0;
+    // height: 120px;
+    padding: 20px;
+    min-height: 96px;
+    font-size: 30px;
+    color: #333;
+    pointer-events: none;
+
+    @at-root #{&}__avatar {
+        height: $card-avatar-height;
+        width: $card-avatar-height;
+        border-radius: 50%;
+        vertical-align: middle;
+    }
+
+    @at-root #{&}__details {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px; 
+        flex: 1;
+    }
+
+    @at-root #{&}__title {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    @at-root #{&}__subtitle {
+        font-size: 12px;
+        font-weight: 300;
+        color: #666;
+        color: rgba(0, 0, 0, .54);
+    }
+
+    @at-root #{&}__content {
+        margin-top: 10px;
+        font-size: 14px;
+        line-height: 1.4;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    // &:first-child {
+    //     margin-top: 0;
+    // }
+
+    // &:last-child {
+    //     margin-bottom: 0;
+    // }
+}

@@ -1,0 +1,34 @@
+.loading {
+
+    @at-root #{&}__circle {
+        border-radius: 50%;
+        display: inline-block;
+        vertical-align: middle;
+        height: $card-avatar-height;
+        width: $card-avatar-height;
+        background-color: $loading-color;
+        animation: pulse .65s infinite alternate;
+    }
+
+    @at-root #{&}__line {
+        height: 10px;
+        margin: 10px 0;
+        background-color: $loading-color;
+        animation: pulse .65s infinite alternate;
+    }
+
+    @at-root #{&}__line-wrapper {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px; 
+        flex: 1;
+    }
+
+     @at-root #{&}__message {
+         margin-top: 15px;
+
+         .loading__line:last-child {
+             margin-bottom: 0;
+         }
+     }
+}
