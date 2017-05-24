@@ -19,7 +19,7 @@ define('datasource/messages',[
         /**
          * Fetch items from datasource.
          */
-        fetch(obj, limit) {
+        fetch(obj) {
             return new Promise((resolve, reject) => {
 
                 let params = obj.params;

@@ -65,6 +65,12 @@ define('components/infinite-scroller-experimental', [], function () {
             this.scroller = scroller;
             this.dataSource = dataSource;
 
+            // Options
+            this.swipeable = options.swipeable;
+            this.PHYSICAL_ITEMS = options.physicalItems || PHYSICAL_ITEMS;
+            this.PAGE_SIZE = options.pageSize || PAGE_SIZE;
+            this.PROXIMITY_BOUNDARY = options.proximityBoundary || PROXIMITY_BOUNDARY;
+
             // This will hold a cache of the data sent from server
             this.itemsCacheData = [];
 
@@ -83,8 +89,6 @@ define('components/infinite-scroller-experimental', [], function () {
 
             this.requestInProgress = false;
 
-            this.swipeable = options.swipeable;
-
             // Reference to current item
             this.target = null;
             this.targetBCR = null;
@@ -95,12 +99,12 @@ define('components/infinite-scroller-experimental', [], function () {
             this.draggingItem = false;
 
             // Create element to manage top height
-            this.anchorItem = document.createElement('div');
-            this.anchorItemHeight = 0;
-            this.anchorItem.style.position = 'absolute';
-            this.anchorItem.style.height = '0px';
-            this.anchorItem.style.width = '20px';
-            this.scroller.appendChild(this.anchorItem);
+            // this.anchorItem = document.createElement('div');
+            // this.anchorItemHeight = 0;
+            // this.anchorItem.style.position = 'absolute';
+            // this.anchorItem.style.height = '0px';
+            // this.anchorItem.style.width = '20px';
+            // this.scroller.appendChild(this.anchorItem);
 
             // Create element to force scroll
             this.scrollRunway = document.createElement('div');
@@ -193,7 +197,7 @@ define('components/infinite-scroller-experimental', [], function () {
                     var proximityToLastPhysicalItem = this.lastPhysicalItemTranslateY - (this.lastPhysicalItem.offsetHeight + 10) - (this.scroller.scrollTop + this.scroller.offsetHeight);
 
                     // if (!this.requestInProgress && (scrollBoundary > this.virtualItems[normalizedLastItemIndex].dataset.translateY)) {
-                    if (!this.requestInProgress && proximityToLastPhysicalItem < 300) {
+                    if (!this.requestInProgress && proximityToLastPhysicalItem < PROXIMITY_BOUNDARY) {
                         // if (!this.requestInProgress && (scrollBoundary > this.scroller.scrollHeight)) {
                         this.loadItems();
                         // something where we say fill lower bottom
@@ -223,7 +227,7 @@ define('components/infinite-scroller-experimental', [], function () {
                     // console.log('Scroller scrolltop: ', this.scroller.scrollTop);
                     // console.log('Distance: ', this.scroller.scrollTop - this.anchorItem.offsetHeight);
 
-                    if (!this.requestInProgress && this.firstPhysicalItemIndex !== 0 && proximityToFirstPhysicalItem < 300) {
+                    if (!this.requestInProgress && this.firstPhysicalItemIndex !== 0 && proximityToFirstPhysicalItem < PROXIMITY_BOUNDARY) {
                         // console.log('First Item: ', this.firstPhysicalItemIndex);
                         // console.log('Last Item: ', this.lastPhysicalItemIndex);
                         // console.log('First item: ', this.physicalItems[normalizeFirstItemIndex]);
@@ -1630,7 +1634,7 @@ define('datasource/messages', [], function () {
 
         _createClass(Messages, [{
             key: 'fetch',
-            value: function fetch(obj, limit) {
+            value: function fetch(obj) {
                 return new Promise(function (resolve, reject) {
 
                     var params = obj.params;
