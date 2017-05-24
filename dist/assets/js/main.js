@@ -27,7 +27,7 @@ define('main', ['components/infinite-scroller', 'components/infinite-scroller-ex
             var scroller = document.querySelector('#messages');
             var scrollerExp = document.querySelector('#messages-exp');
             var messagesSource = new Messages({
-                url: 'http://message-list.appspot.com',
+                url: 'https://message-list.appspot.com',
                 dataEndpoint: '/messages'
             });
 

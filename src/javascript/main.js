@@ -14,7 +14,7 @@ define('main', [
             const scroller = document.querySelector('#messages');
             const scrollerExp = document.querySelector('#messages-exp');
             const messagesSource = new Messages({
-                url: 'http://message-list.appspot.com',
+                url: 'https://message-list.appspot.com',
                 dataEndpoint: '/messages'
             });
 
