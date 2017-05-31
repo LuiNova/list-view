@@ -110,6 +110,8 @@ define('components/infinite-scroller-experimental', [], function () {
 
             this.previousScrollTop = 0;
 
+            this.itemsRemovedInSuccession = 0;
+
             this.addEventListeners();
 
             this.onResize();
@@ -357,17 +359,18 @@ define('components/infinite-scroller-experimental', [], function () {
         }, {
             key: 'calculatePhysicalItemsIndex',
             value: function calculatePhysicalItemsIndex(itemsLength) {
-
                 this.lastPhysicalItemIndex += itemsLength;
                 this.firstPhysicalItemIndex = Math.max(0, this.lastPhysicalItemIndex - (this.PHYSICAL_ITEMS - 1));
                 this.middlePhysicalItemIndex = this.firstPhysicalItemIndex + (this.lastPhysicalItemIndex - this.firstPhysicalItemIndex + 1) / 2;
 
-                this.firstPhysicalItem = this.physicalItems[this.firstPhysicalItemIndex % this.PHYSICAL_ITEMS];
-                this.lastPhysicalItem = this.physicalItems[this.lastPhysicalItemIndex % this.PHYSICAL_ITEMS];
+                this.firstPhysicalItem = this.physicalItems[this.firstPhysicalItemIndex % this.PHYSICAL_ITEMS] || this.physicalItems[(this.firstPhysicalItemIndex + this.itemsRemovedInSuccession) % this.PHYSICAL_ITEMS];
+                this.lastPhysicalItem = this.physicalItems[this.lastPhysicalItemIndex % this.PHYSICAL_ITEMS] || this.physicalItems[(this.lastPhysicalItemIndex - this.itemsRemovedInSuccession) % this.PHYSICAL_ITEMS];;
 
                 // this is used for the next
                 this.firstPhysicalItemTranslateY = parseInt(this.firstPhysicalItem.dataset.translateY, 10) - (this.firstPhysicalItem.offsetHeight + 10);
                 this.lastPhysicalItemTranslateY = parseInt(this.lastPhysicalItem.dataset.translateY, 10) + (this.lastPhysicalItem.offsetHeight + 10);
+
+                this.itemsRemovedInSuccession = 0;
             }
         }, {
             key: 'onTouchStart',
@@ -472,6 +475,8 @@ define('components/infinite-scroller-experimental', [], function () {
                     var targetDataIndex = parseInt(this.target.dataset.id, 10);
                     this.physicalItems.splice(targetIndex, 1);
                     this.itemsCacheData.splice(targetDataIndex - 1, 1);
+
+                    this.itemsRemovedInSuccession += 1;
 
                     this.animateOtherItemsIntoPosition(targetIndex, targetTranslateY);
 
